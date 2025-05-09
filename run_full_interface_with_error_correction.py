@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 import mysql.connector
 
 # Configure Gemini API
-client = genai.Client(api_key="AIzaSyDbroFYErpqKKlwl6uearndP573TNyGJjg") ## change to your own api key
+client = genai.Client(api_key="") ## enter your own api key
 
 # Interpret user intent
 def interpret_user_input(user_input):

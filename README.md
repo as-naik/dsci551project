@@ -7,17 +7,24 @@ A Python-based interface system that allows natural language interaction with bo
 - Python 3.8 or higher
 - MySQL Server
 - MongoDB Server
-- Google Gemini API key
+- Google Gemini API key (get it from [Google AI Studio](https://makersuite.google.com/app/apikey))
 
 ## Setup Instructions
 
-1. **Clone the Repository**
+1. **Get Gemini API Key**
+   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Sign in with your Google account
+   - Click on "Get API key" in the API section
+   - Create a new API key or use an existing one
+   - Copy the API key and keep it secure
+
+2. **Clone the Repository**
    ```bash
    git clone <repository-url>
    cd <repository-directory>
    ```
 
-2. **Create and Activate Virtual Environment**
+3. **Create and Activate Virtual Environment**
    ```bash
    # Create virtual environment
    python -m venv chatdb_env
@@ -29,12 +36,12 @@ A Python-based interface system that allows natural language interaction with bo
    source chatdb_env/bin/activate
    ```
 
-3. **Install Dependencies**
+4. **Install Dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Configure Database Connections**
+5. **Configure Database Connections**
 
    In `run_full_interface_with_error_correction.py`, update the following:
    ```python
@@ -49,8 +56,10 @@ A Python-based interface system that allows natural language interaction with bo
    mongo_client = pymongo.MongoClient("mongodb://localhost:27017/")
 
    # Gemini API Key
-   client = genai.Client(api_key="YOUR_GEMINI_API_KEY")
+   client = genai.Client(api_key="YOUR_GEMINI_API_KEY")  # Required for natural language processing
    ```
+
+   Note: The system uses the Gemini 2.0 Flash model for natural language processing.
 
 ## Loading Sample Databases
 
@@ -70,7 +79,7 @@ client = MongoClient("mongodb://localhost:27017/")
 db = client["famous_painters_db"]  # or "bike_store" for Bike Store database
 
 # Dataset Path (in both scripts)
-csv_directory = "dsci551project/FamousPaintingDB"  # Change this to your dataset path
+csv_directory = "FamousPaintingDB"  # Path to dataset files
 ```
 
 ### Loading Bike Store Database
@@ -83,12 +92,12 @@ csv_directory = "dsci551project/FamousPaintingDB"  # Change this to your dataset
    db_password = "YOUR_MYSQL_PASSWORD"
    db_host = "localhost"
    db_name = "bike_store"
-   csv_directory = "dsci551project/Bike_Store"  # Path to Bike Store CSV files
+   csv_directory = "Bike_Store"  # Path to Bike Store CSV files
    ```
 
 2. **Load Data**
    ```bash
-   python dsci551project/load_sqldb.py
+   python load_sqldb.py
    ```
    Note: The script will automatically create the database if it doesn't exist.
 
@@ -99,12 +108,12 @@ If you want to load Bike Store into MongoDB instead:
    ```python
    client = MongoClient("mongodb://localhost:27017/")
    db = client["bike_store"]
-   path = "dsci551project/Bike_Store"  # Path to Bike Store CSV files
+   path = "Bike_Store"  # Path to Bike Store CSV files
    ```
 
 2. **Load Data**
    ```bash
-   python dsci551project/import_csv_to_mongodb.py
+   python import_csv_to_mongodb.py
    ```
    Note: MongoDB will automatically create the database when first used.
 
@@ -121,12 +130,12 @@ If you want to load Bike Store into MongoDB instead:
    ```python
    client = MongoClient("mongodb://localhost:27017/")
    db = client["famous_painters_db"]
-   path = "dsci551project/FamousPaintingDB"  # Path to Famous Painting CSV files
+   path = "FamousPaintingDB"  # Path to Famous Painting CSV files
    ```
 
 3. **Load Data**
    ```bash
-   python dsci551project/import_csv_to_mongodb.py
+   python import_csv_to_mongodb.py
    ```
    Note: MongoDB will automatically create the database when first used.
 
@@ -139,12 +148,12 @@ If you want to load Famous Paintings into MySQL instead:
    db_password = "YOUR_MYSQL_PASSWORD"
    db_host = "localhost"
    db_name = "famous_painters_db"
-   csv_directory = "dsci551project/FamousPaintingDB"  # Path to Famous Painting CSV files
+   csv_directory = "FamousPaintingDB"  # Path to Famous Painting CSV files
    ```
 
 2. **Load Data**
    ```bash
-   python dsci551project/load_sqldb.py
+   python load_sqldb.py
    ```
    Note: The script will automatically create the database if it doesn't exist.
 
@@ -167,7 +176,7 @@ If you want to load Famous Paintings into MySQL instead:
 
 1. **Start the Interface**
    ```bash
-   python dsci551project/run_full_interface_with_error_correction.py
+   python run_full_interface_with_error_correction.py
    ```
 
 2. **Available Commands**
@@ -181,11 +190,11 @@ If you want to load Famous Paintings into MySQL instead:
 ## Project Structure
 
 ```
-dsci551project/
+.
 ├── run_full_interface_with_error_correction.py
 ├── load_sqldb.py
 ├── import_csv_to_mongodb.py
-├── Bike Store/
+├── Bike_Store/
 │   ├── brands.csv
 │   ├── categories.csv
 │   ├── customers.csv
@@ -224,8 +233,10 @@ dsci551project/
    - Verify Gemini API key is valid
    - Check internet connectivity
    - Ensure API key has proper permissions
+   - The system requires Gemini 2.0 Flash API access
 
 3. **Data Loading Issues**
    - Verify CSV files are in correct locations
    - Check database permissions
-   - Ensure proper database names are used 
+   - Ensure proper database names are used
+   - Make sure paths in scripts match your local directory structure 
