@@ -45,18 +45,18 @@ A Python-based interface system that allows natural language interaction with bo
 
    In `run_full_interface_with_error_correction.py`, update the following:
    ```python
-   # MySQL Connection
+   # MySQL Connection (Line 384)
    mysql_conn = mysql.connector.connect(
        host="localhost",
        user="YOUR_MYSQL_USERNAME",
        password="YOUR_MYSQL_PASSWORD"
    )
 
-   # MongoDB Connection (should stay the same)
+   # MongoDB Connection (should stay the same) (Line 392)
    mongo_client = pymongo.MongoClient("mongodb://localhost:27017/")
 
    # Gemini API Key
-   client = genai.Client(api_key="YOUR_GEMINI_API_KEY")  # Required for natural language processing
+   client = genai.Client(api_key="YOUR_GEMINI_API_KEY")  # Required for natural language processing (Line 8)
    ```
 
    Note: The system uses the Gemini 2.0 Flash model for natural language processing.
@@ -68,18 +68,22 @@ A Python-based interface system that allows natural language interaction with bo
 The loading scripts use the following connection parameters:
 
 ```python
-# MySQL Connection Parameters (in load_sqldb.py)
+# MySQL Connection Parameters (in load_sqldb.py) (Line 7)
 db_user = "YOUR_MYSQL_USERNAME"
 db_password = "YOUR_MYSQL_PASSWORD"
 db_host = "localhost"
 db_name = "famous_painters_db"  # or "bike_store" for Bike Store database
 
-# MongoDB Connection (in import_csv_to_mongodb.py)
+# MongoDB Connection (in import_csv_to_mongodb.py) (Line 7)
 client = MongoClient("mongodb://localhost:27017/")
-db = client["famous_painters_db"]  # or "bike_store" for Bike Store database
+db_name = "famous_painters_db" # or "bike_store" for Bike Store database
 
-# Dataset Path (in both scripts)
+# Dataset Path (in load_sqldb.py) (Line 43)
 csv_directory = "FamousPaintingDB"  # Path to dataset files
+
+# Dataset Path (in import_csv_to_mongodb.py) (Line 12)
+path = "FamousPaintingDB" # Path to dataset files
+
 ```
 
 ### Loading Bike Store Database
@@ -107,7 +111,7 @@ If you want to load Bike Store into MongoDB instead:
    In `import_csv_to_mongodb.py`, modify the configuration:
    ```python
    client = MongoClient("mongodb://localhost:27017/")
-   db = client["bike_store"]
+   db_name = "bike_store"
    path = "Bike_Store"  # Path to Bike Store CSV files
    ```
 
@@ -129,7 +133,7 @@ If you want to load Bike Store into MongoDB instead:
    In `import_csv_to_mongodb.py`, verify the MongoDB configuration:
    ```python
    client = MongoClient("mongodb://localhost:27017/")
-   db = client["famous_painters_db"]
+   db_name = "famous_painters_db"
    path = "FamousPaintingDB"  # Path to Famous Painting CSV files
    ```
 

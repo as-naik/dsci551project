@@ -6,18 +6,19 @@ from pymongo import MongoClient
 def import_csv_to_mongodb():
     client = MongoClient("mongodb://localhost:27017/")
 
-    db = client["famous_painters_db"]
+    db_name = "famous_painters_db" ## Change this to the name of the database you want to create
+    db = client[db_name]
 
-    bike_store_path = "C:/Users/athar/Documents/USC/551/Project/dsci551project/FamousPaintingDB"
+    path = "FamousPaintingDB"
 
-    csv_files = [f for f in os.listdir(bike_store_path) if f.endswith('.csv')]
+    csv_files = [f for f in os.listdir(path) if f.endswith('.csv')]
 
     for csv_file in csv_files:
         # Get the collection name (file name without extension)
         collection_name = os.path.splitext(csv_file)[0]
         
         # Read the CSV file
-        file_path = os.path.join(bike_store_path, csv_file)
+        file_path = os.path.join(path, csv_file)
         df = pd.read_csv(file_path)
         
         # Convert DataFrame to list of dictionaries
@@ -33,7 +34,7 @@ def import_csv_to_mongodb():
         else:
             print(f"No records to import for {collection_name}")
 
-    print("All CSV files have been imported to the bikestore database.") 
+    print(f"All CSV files have been imported to the {db_name} database.") 
 
 if __name__ == "__main__":
     import_csv_to_mongodb()

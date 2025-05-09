@@ -5,10 +5,10 @@ import mysql.connector
 from mysql.connector import errorcode
 
 # Database connection details
-db_user = "tempuser"
-db_password = "TestPass123!"
+db_user = "tempuser" ## Change this to your username
+db_password = "TestPass123!" ## Change this to your password
 db_host = "localhost"  # e.g., "localhost"
-db_name = "famous_painters_db"
+db_name = "famous_painters_db" ## Change this to the name of the database you want to create
 
 # Create a MySQL connection (without selecting a specific database initially)
 conn = mysql.connector.connect(
@@ -40,7 +40,7 @@ conn.close()
 engine = create_engine(f"mysql+mysqlconnector://{db_user}:{db_password}@{db_host}/{db_name}")
 
 # Directory containing CSV files
-csv_directory = "dsci551project/FamousPaintingDB"  # Change this to your CSV directory
+csv_directory = "FamousPaintingDB"  # Change this to your CSV directory
 
 # Loop through all CSV files in the directory
 for file in os.listdir(csv_directory):
