@@ -349,6 +349,8 @@ def get_mysql_tables(db_name):
 
 # Get MySQL columns for a table
 def get_mysql_columns(db_name, table_name):
+    if db_name == None and current_database != None:
+        db_name = current_database
     try:
         mysql_cursor.execute(f"USE {db_name}")
         mysql_cursor.execute(f"DESCRIBE {table_name}")
